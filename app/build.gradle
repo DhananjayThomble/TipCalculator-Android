@@ -29,6 +29,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+//     for making task easy for referencing the view from code file.
+    buildFeatures{
+        viewBinding = true;
+    }
+
 }
 
 dependencies {

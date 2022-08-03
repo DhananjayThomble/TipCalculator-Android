@@ -11,10 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/cost_of_service"
+        android:importantForAutofill="no"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/serviceQuestion"
@@ -29,8 +29,8 @@
         android:id="@+id/optionsForTip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checkedButton="@id/optionFifteenPercent"
         android:layout_marginTop="20dp"
+        android:checkedButton="@id/optionFifteenPercent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/serviceQuestion">
 
@@ -57,21 +57,29 @@
         android:id="@+id/roundOfSwitch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/optionsForTip"
         android:layout_marginTop="10dp"
-        android:text="@string/round_up_the_tip"
         android:checked="true"
-        />
+        android:text="@string/round_up_the_tip"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/optionsForTip" />
 
     <Button
         android:id="@+id/btnCalculate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/roundOfSwitch"
         android:layout_marginTop="10dp"
         android:text="@string/calculate"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/roundOfSwitch" />
+
+    <TextView
+        android:id="@+id/txtFinalTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/btnCalculate"
+        app:layout_constraintTop_toBottomOf="@id/btnCalculate"
+        tools:text="Tip Amount: $10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
