@@ -7,7 +7,7 @@ import java.text.NumberFormat
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,35 +17,38 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        setting click listner to the calculate button
+//        setting click listener to the calculate button
         binding.btnCalculate.setOnClickListener { calculateTip() }
 
     }
 
-    fun calculateTip() {
+    private fun calculateTip() {
         val stringInput = binding.editText.text.toString()
         val cost = stringInput.toDoubleOrNull()
-        if(cost == null){
-            binding.txtFinalTip.text = ""
+        if (cost == null || cost == 0.0) {
+            displayTip(0.0)
             return
         }
-        val selectedTip = binding.optionsForTip.checkedRadioButtonId
 
-        val percentageTip = when (selectedTip) {
-            R.id.optionTenPercent -> 0.10;
-            R.id.optionFifteenPercent -> 0.15;
-            else -> 0.20;
+        //        val selectedTip = binding.optionsForTip.checkedRadioButtonId
+        val percentageTip = when (binding.optionsForTip.checkedRadioButtonId) {
+            R.id.optionTenPercent -> 0.10
+            R.id.optionFifteenPercent -> 0.15
+            else -> 0.20
         }
 
-        var finalTip = cost * percentageTip
+        var tip = cost * percentageTip
 
-        val roundUp = binding.roundOfSwitch.isChecked
-        if (roundUp) {
-            finalTip = kotlin.math.ceil(finalTip)
+//        val roundUp = binding.roundOfSwitch.isChecked
+        if (binding.roundOfSwitch.isChecked) {
+            tip = kotlin.math.ceil(tip)
         }
-        val formattedCurrency = NumberFormat.getCurrencyInstance().format(finalTip)
+        displayTip(tip)
+    }
+
+    private fun displayTip(tip: Double) {
+        val formattedCurrency = NumberFormat.getCurrencyInstance().format(tip)
         binding.txtFinalTip.text = getString(R.string.tip_amount, formattedCurrency)
-
     }
 
 }
